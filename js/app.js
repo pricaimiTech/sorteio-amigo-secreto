@@ -18,20 +18,15 @@ function addName() {
  * @returns lista de nomes para o sorteio
  */
 function setListName(name) {
-    if (name === "") {
+    newName = name.toUpperCase()
+    if (newName === "") {
         alert("Adicione um nome válido")
-    } else if (listNames.includes(name)) {
+    } else if (listNames.includes(newName)) {
         alert("Amigo já adicionado ao sorteio")
     } else {
-        // listNames = updateSortListNames(name)
-
-        listNames.push(name)
+        listNames.push(newName)
         cleanInput()
-        // paragrafo = document.createElement('p')
-        // paragrafo.textContent = name;
-        // listaAmigos.appendChild(paragrafo);
         updateSortListNames(listNames)
-
     }
 
     updateSortListNames(listNames)
@@ -47,11 +42,9 @@ function updateSortListNames(listNames) {
         console.log(listNames[index]);
 
         paragrafo.textContent = listNames[index];
-        // listaAmigos.appendChild(paragrafo);
 
         // Adiciona um evento de clique para excluir o amigo
         paragrafo.addEventListener('click', function() {
-            console.log("clicou");
             deleteNameList(listNames, index);
         });
 
@@ -100,6 +93,11 @@ function sortName() {
 }
 
 
+/**
+ * @description valida se a lista tem pelo menos 4 pessoas
+ * @param {*} listaNames 
+ * @returns caso possua menos de 4 pessoas deve travar o sorteio
+ */
 function checkSort(listaNames) {
     if(listaNames.length <4) {
         alert("Adicione pelo menos 4 amigos")
@@ -107,10 +105,17 @@ function checkSort(listaNames) {
     }
 }
 
+/**
+ * @description remover um nome da lista para sorteio
+ * @param {*} lista lista de amigos para o sorteio
+ * @param {*} index posição do amigo que deve ser removido
+ */
 function deleteNameList(lista, index) {
+    // cleanSortList()
     lista.splice(index, 1)
     console.log(`listaName atualizada ${listNames}`)
     updateSortListNames(listNames)
+    sortName()
 }
 
 
