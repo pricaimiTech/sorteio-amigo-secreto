@@ -8,8 +8,12 @@ function addName() {
 }
 
 function setListName(name) {
-    listNames.push(name)
-    document.getElementById("lista-amigos").innerHTML = listNames
+    if(name === ""){
+        alert("Adicione um nome válido")
+    }else{
+        listNames.push(name)
+        document.getElementById("lista-amigos").innerHTML = listNames
+    }
     return listNames
 }
 
@@ -39,10 +43,15 @@ function sortName() {
 
     //math.random pelo tamanho do array listaNames
     for (let index = 0; index < listNames.length; index++) {
-        // a pessoa não pode tirar o próprio nome
         randomIndex = Math.floor(Math.random() * randomNames.length)
+        // a pessoa não pode tirar o próprio nome
+        while (listNames[index] === randomNames[randomIndex]) {
+            randomIndex = Math.floor(Math.random() * randomNames.length)
+        }
         sorteio.innerHTML = sorteio.innerHTML + listNames[index] + ' --> ' + randomNames[randomIndex] + '<br>';
-        randomNames.splice(randomIndex, 1)
+        //remover o nome sorteado da lista de nomes
+        randomNames = randomNames.filter((name, index) => index !== randomIndex)
+        console.log(`Pares: ${listNames[index] + ' --> ' + randomNames[randomIndex]}`)
         console.log(`Nomes a serem sorteados ${randomNames}`);
 
     }
