@@ -20,8 +20,11 @@ function addName() {
 function setListName(name) {
     if (name === "") {
         alert("Adicione um nome válido")
+    } else if (listNames.includes(name)) {
+        alert("Amigo já adicionado ao sorteio")
     } else {
         // listNames = updateSortListNames(name)
+
         listNames.push(name)
         cleanInput()
         // paragrafo = document.createElement('p')
@@ -83,7 +86,6 @@ function sortName() {
     let randomNames = listNames
     let randomIndex;
 
-
     //math.random pelo tamanho do array listaNames
     for (let index = 0; index < listNames.length; index++) {
         randomIndex = Math.floor(Math.random() * randomNames.length)
@@ -94,6 +96,14 @@ function sortName() {
         sorteio.innerHTML = sorteio.innerHTML + listNames[index] + ' --> ' + randomNames[randomIndex] + '<br>';
         //remover o nome sorteado da lista de nomes
         randomNames = removeName(randomNames, randomIndex)
+    }
+}
+
+
+function checkSort(listaNames) {
+    if(listaNames.length <4) {
+        alert("Adicione pelo menos 4 amigos")
+        return 
     }
 }
 
