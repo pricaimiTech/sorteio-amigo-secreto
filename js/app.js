@@ -1,35 +1,55 @@
 let listNames = [];
+let listaAmigos = []
 let newName;
 
+/**
+ * @description adiciona o nome na lista de sorteio e limpa o campo de input nome
+ */
 function addName() {
     newName = document.getElementById("nome-amigo").value
     listNames = setListName(newName)
     cleanInput()
 }
 
+/**
+ * 
+ * @param {*} name novo nome a ser adicionado
+ * @returns lista de nomes para o sorteio
+ */
 function setListName(name) {
-    if(name === ""){
+    if (name === "") {
         alert("Adicione um nome válido")
-    }else{
-        listNames.push(name)
-        document.getElementById("lista-amigos").innerHTML = listNames
+    } else {
+        listNames = updateSortListNames(name)
     }
     return listNames
 }
 
+function updateSortListNames(name) {
+    let paragrafo;
+    listaAmigos = document.getElementById('lista-amigos');
+    listNames.push(name)
+    paragrafo = document.createElement('p')
+    paragrafo.textContent = name;
+    listaAmigos.appendChild(paragrafo);
+
+    return listNames
+
+}
+/**
+ * @description reiniciar o jogo
+ */
 function restart() {
     listNames = []
     cleanInput()
-    document.getElementById("lista-amigos").innerHTML = ""
-    console.log(`Lista de nomes reiniciada: ${listNames}`);
-    document.getElementById('lista-sorteio').innerHTML = ""
+    cleanNameList()
+    cleanSortList()
 }
 
-function cleanInput() {
-    document.getElementById("nome-amigo").value = ""
-}
+
 
 /**
+ * @description realiza o sorteio
  * @argument {randomNames} - lista criada para embaralhar os nomes da listaNames para sortear
  * @argument {sorteio} - div onde será exibido o sorteio
  * @argument {randomIndex} - index randomico para sortear os nomes da listaNames
@@ -38,7 +58,6 @@ function sortName() {
     let sorteio = document.getElementById('lista-sorteio');
     let randomNames = listNames
     let randomIndex;
-    console.log(`Nomes para o sorteio ${listNames}`);
 
 
     //math.random pelo tamanho do array listaNames
@@ -50,9 +69,38 @@ function sortName() {
         }
         sorteio.innerHTML = sorteio.innerHTML + listNames[index] + ' --> ' + randomNames[randomIndex] + '<br>';
         //remover o nome sorteado da lista de nomes
-        randomNames = randomNames.filter((name, index) => index !== randomIndex)
-        console.log(`Pares: ${listNames[index] + ' --> ' + randomNames[randomIndex]}`)
-        console.log(`Nomes a serem sorteados ${randomNames}`);
-
+        randomNames = removeName(randomNames, randomIndex)
     }
+}
+
+
+/**
+ * @description deleta um nome da lista para o sorteio
+ * @param {*} index 
+ */
+function removeName(randomNames, randomIndex) {
+    randomNames = randomNames.filter((name, index) => index !== randomIndex)
+    return randomNames
+}
+
+/**
+ * @description limpa o campo de input nome 
+ */
+function cleanInput() {
+    document.getElementById("nome-amigo").value = ""
+}
+
+/**
+ * @description limpa a lista de amigos
+ */
+function cleanNameList() {
+    document.getElementById("lista-amigos").innerHTML = ""
+    console.log(`Lista de nomes reiniciada: ${listNames}`);
+}
+
+/**
+ * @description limpa a lista dos nomes sorteados
+ */
+function cleanSortList() {
+    document.getElementById('lista-sorteio').innerHTML = ""
 }
