@@ -1,5 +1,6 @@
 let listNames = [];
-let listaAmigos = []
+let listaAmigos = document.getElementById('lista-amigos');
+let paragrafo;
 let newName;
 
 /**
@@ -20,18 +21,41 @@ function setListName(name) {
     if (name === "") {
         alert("Adicione um nome válido")
     } else {
-        listNames = updateSortListNames(name)
+        // listNames = updateSortListNames(name)
+        listNames.push(name)
+        cleanInput()
+        // paragrafo = document.createElement('p')
+        // paragrafo.textContent = name;
+        // listaAmigos.appendChild(paragrafo);
+        updateSortListNames(listNames)
+
     }
+
+    updateSortListNames(listNames)
     return listNames
 }
 
-function updateSortListNames(name) {
-    let paragrafo;
-    listaAmigos = document.getElementById('lista-amigos');
-    listNames.push(name)
-    paragrafo = document.createElement('p')
-    paragrafo.textContent = name;
-    listaAmigos.appendChild(paragrafo);
+function updateSortListNames(listNames) {
+    listaAmigos.innerHTML = ''
+    console.log(listNames);
+    
+    for (let index = 0; index < listNames.length; index++) {
+        paragrafo = document.createElement('p')
+        console.log(listNames[index]);
+
+        paragrafo.textContent = listNames[index];
+        // listaAmigos.appendChild(paragrafo);
+
+        // Adiciona um evento de clique para excluir o amigo
+        paragrafo.addEventListener('click', function() {
+            console.log("clicou");
+            deleteNameList(listNames, index);
+        });
+
+
+        // Adiciona o parágrafo à lista
+        listaAmigos.appendChild(paragrafo);
+    }
 
     return listNames
 
@@ -71,6 +95,12 @@ function sortName() {
         //remover o nome sorteado da lista de nomes
         randomNames = removeName(randomNames, randomIndex)
     }
+}
+
+function deleteNameList(lista, index) {
+    lista.splice(index, 1)
+    console.log(`listaName atualizada ${listNames}`)
+    updateSortListNames(listNames)
 }
 
 
