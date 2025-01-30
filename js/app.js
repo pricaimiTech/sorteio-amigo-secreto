@@ -29,17 +29,14 @@ function setListName(name) {
         updateSortListNames(listNames)
     }
 
-    updateSortListNames(listNames)
     return listNames
 }
 
 function updateSortListNames(listNames) {
     listaAmigos.innerHTML = ''
-    console.log(listNames);
     
     for (let index = 0; index < listNames.length; index++) {
         paragrafo = document.createElement('p')
-        console.log(listNames[index]);
 
         paragrafo.textContent = listNames[index];
 
@@ -111,11 +108,9 @@ function checkSort(listaNames) {
  * @param {*} index posição do amigo que deve ser removido
  */
 function deleteNameList(lista, index) {
-    // cleanSortList()
     lista.splice(index, 1)
-    console.log(`listaName atualizada ${listNames}`)
     updateSortListNames(listNames)
-    sortName()
+    cleanSortList()
 }
 
 
@@ -140,7 +135,6 @@ function cleanInput() {
  */
 function cleanNameList() {
     document.getElementById("lista-amigos").innerHTML = ""
-    console.log(`Lista de nomes reiniciada: ${listNames}`);
 }
 
 /**
