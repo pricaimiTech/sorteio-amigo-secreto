@@ -13,7 +13,7 @@ Quer conhecer mais as regras de negócio? Acesse o arquivo [Epico](Epico.feature
 
 ## Quer jogar ?
 
-Acesse o [Amigo Secreto]()
+Acesse o [Amigo Secreto](https://sorteio-amigo-secreto-ten.vercel.app/)
 
 <img src="./assets/tela-sorteio.png">
 
